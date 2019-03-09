@@ -3,13 +3,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 public class USACO{
+
   public static void main(String[] args){
-  try{
-    System.out.println(bronze("makelake.1.in"));
-  }catch(FileNotFoundException e){
-    System.out.println("file not here");
+    try{
+      silver("ctravel.1.in");
+    }catch(FileNotFoundException e){
+      //System.out.println("file not here");
+    }
   }
-  }
+
   public static int bronze(String filename) throws FileNotFoundException{
     //read in the file
     File f = new File(filename);
@@ -38,16 +40,16 @@ public class USACO{
     //do the steps
     for (int[] instruction : instructions){
       int row_S = instruction[0] - 1;
-      System.out.println("row_S: " + row_S);
+      //System.out.println("row_S: " + row_S);
       int col_S = instruction[1] - 1;
-      System.out.println("col_S: " + col_S);
+      //System.out.println("col_S: " + col_S);
       int stompAmount = instruction[2];
-      System.out.println("stompAmount: " + stompAmount);
+      //System.out.println("stompAmount: " + stompAmount);
       int highestNum = 0;
       //scan thru numbers to find highest one
       for (int rIncrease = 0; rIncrease<3; rIncrease++){
         for (int cIncrease = 0; cIncrease<3; cIncrease++){
-          System.out.println("seeing if terrain" + (row_S + rIncrease) + ", " + (col_S+cIncrease)+ " is higher than " + highestNum);
+          //System.out.println("seeing if terrain" + (row_S + rIncrease) + ", " + (col_S+cIncrease)+ " is higher than " + highestNum);
           if (terrain[row_S + rIncrease][col_S+cIncrease] > highestNum){
             highestNum = terrain[row_S + rIncrease][col_S+cIncrease];
           }
@@ -64,7 +66,7 @@ public class USACO{
         }
       }
       for (int lineOfTerrain = 0; lineOfTerrain < rows; lineOfTerrain++){
-        System.out.println(Arrays.toString(terrain[lineOfTerrain]));
+        //System.out.println(Arrays.toString(terrain[lineOfTerrain]));
       }
     }
     //now find aggregated depths
@@ -77,5 +79,30 @@ public class USACO{
       }
     }
     return aggDepth * 72 * 72 * -1; //bc aggDepth is positive
+  }
+  public static int silver(String filename) throws FileNotFoundException{
+    File f = new File(filename);
+    Scanner in = new Scanner(f);
+    int rows = in.nextInt();
+    int cols = in.nextInt();
+    int time = in.nextInt();
+    in.nextLine();//idk why but need to move cursor down
+    char[][] board = new char[rows][cols];
+    for (int i = 0; i<rows; i++){
+      String process = in.nextLine();
+      //System.out.println(process);
+      board[i] = process.toCharArray();
+    }
+    int rowStart = in.nextInt();
+    int colStart = in.nextInt();
+    int rowEnd = in.nextInt();
+    int colEnd = in.nextInt();
+    System.out.println("Rows, cols and time: " + rows + ", " + cols + ", " + time);
+    System.out.println("board:");
+    for (int j = 0; j<rows; j++){
+      System.out.println(Arrays.toString(board[j]));
+    }
+    System.out.println("RowStart, colStart, rowEnd, colEnd: " + rowStart + ", " + colStart + ", " + rowEnd + ", " + colEnd);
+    return -1;
   }
 }
