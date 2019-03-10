@@ -3,7 +3,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 public class USACO{
-  /*
+
   public static void main(String[] args){
     try{
       System.out.println(silver("ctravel.2.in"));
@@ -11,7 +11,7 @@ public class USACO{
       //System.out.println("file not here");
     }
   }
-  */
+
   public static int bronze(String filename) throws FileNotFoundException{
     //read in the file
     File f = new File(filename);
@@ -101,6 +101,11 @@ public class USACO{
         }
       }
     }
+    /*
+    for (int rrr=0; rrr<rows; rrr++){
+      System.out.println(Arrays.toString(canUpdate[rrr])); // so to see if my canUpdate is correct
+    }
+    */
     int rowStart = in.nextInt() - 1;
     int colStart = in.nextInt() - 1;
     int rowEnd = in.nextInt() - 1;
@@ -111,20 +116,47 @@ public class USACO{
       for (int col = 0; col<cols; col++){
         boardA[row][col] = 0;
         boardB[row][col] = 0;
-        if (row == rowStart && col == colStart){
-          boardA[row][col] = 1;
-        }
+        //don't modify boardA[rowStart][colStart] to = 1, this is an edge case. in n=3, rS cS isn't 5 but 4
       }
+    }
+    try{
+      if (canUpdate[rowStart+1][colStart]){
+        boardB[rowStart+1][colStart] = 1;
+      }
+    }catch (IndexOutOfBoundsException e){
+
+    }try{
+      if (canUpdate[rowStart-1][colStart]){
+        boardB[rowStart-1][colStart] = 1;
+      }
+    }catch (IndexOutOfBoundsException e){
+
+    }try{
+      if (canUpdate[rowStart][colStart+1]){
+        boardB[rowStart][colStart+1] = 1;
+      }
+    }catch (IndexOutOfBoundsException e){
+
+    }try{
+      if (canUpdate[rowStart][colStart-1]){
+        boardB[rowStart][colStart-1] = 1;
+      }
+    }catch (IndexOutOfBoundsException e){
+
     }//initialized boards
-    int toReturn = boardA[rowEnd][colEnd]; // this is the val of toReturn
-    for (int curTime = 1; curTime <= time; curTime++){//idt it makes a difference to count back, if time is 0 won't enter loop otherwise makes no diff
+    int toReturn = boardB[rowEnd][colEnd]; // this is the val of toReturn
+    if (rowEnd == rowStart && colEnd == colStart){
+      toReturn = 1;
+    }
+    for (int curTime = 2; curTime <= time; curTime++){//idt it makes a difference to count back, if time is 0 won't enter loop otherwise makes no diff
       if (curTime%2 == 0){ //modify boardA
-        //System.out.println("\n" + curTime + "printing boardA");
+        System.out.println("\n" + curTime + " printing boardA");
         //System.out.println(Arrays.toString(boardA));
         for (int r = 0; r<rows; r++){
-          //System.out.println(Arrays.toString(boardA[r]));
+        //  System.out.println(Arrays.toString(boardA[r]));
           for (int c = 0; c<cols; c++){
             if (boardB[r][c] == 0 && canUpdate[r][c]){ //means can be modified in other board
+              boardA[r][c] = 0; //see if need to remove
               try{
                 boardA[r][c] += boardB[r+1][c];
               }catch (IndexOutOfBoundsException e){
@@ -155,15 +187,17 @@ public class USACO{
               */
             }
           }
+          System.out.println(Arrays.toString(boardA[r])+ "                        " + Arrays.toString(boardChars[r]));
         }
         toReturn = boardA[rowEnd][colEnd];
+        System.out.println(toReturn + "<-- toReturn");
       }else{ //modify boardB
-        //System.out.println("\n" + curTime + "printing boardB");
+        System.out.println("\n" + curTime + " printing boardB");
         //System.out.println(Arrays.toString(boardB));
         for (int r = 0; r<rows; r++){
-          //System.out.println(Arrays.toString(boardB[r]));
           for (int c = 0; c<cols; c++){
             if (boardA[r][c] == 0 && canUpdate[r][c]){ //means can be modified in other board
+              boardB[r][c] = 0;
               try{
                 boardB[r][c] += boardA[r+1][c];
               }catch (IndexOutOfBoundsException e){
@@ -183,8 +217,10 @@ public class USACO{
               }
             }
           }
+          System.out.println(Arrays.toString(boardB[r]) + "                " + Arrays.toString(boardChars[r]));
         }
         toReturn = boardB[rowEnd][colEnd];
+        System.out.println(toReturn + "<-- toReturn");
       }
     }
     return toReturn;
