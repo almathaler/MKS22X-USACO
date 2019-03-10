@@ -87,7 +87,7 @@ public class USACO{
     int cols = in.nextInt();
     int time = in.nextInt();
     in.nextLine();//idk why but need to move cursor down
-    char[][] board = new char[rows][cols];
+    char[][] boardChars = new char[rows][cols];
     for (int i = 0; i<rows; i++){
       String process = in.nextLine();
       //System.out.println(process);
@@ -97,12 +97,14 @@ public class USACO{
     int colStart = in.nextInt();
     int rowEnd = in.nextInt();
     int colEnd = in.nextInt();
-    System.out.println("Rows, cols and time: " + rows + ", " + cols + ", " + time);
-    System.out.println("board:");
-    for (int j = 0; j<rows; j++){
-      System.out.println(Arrays.toString(board[j]));
-    }
-    System.out.println("RowStart, colStart, rowEnd, colEnd: " + rowStart + ", " + colStart + ", " + rowEnd + ", " + colEnd);
+    //make board of booleans
+    //make n = 0 board [EVEN]
+    //make n = 1 board [ODD]
+    //make workingEven board and workingOdd board
+    //workingEven updated to be n=2, will be all the ok-for-even-to-update squares
+    //updated as the sum of the values of the 4 ok (boolean board determines if it's ok)
+    //values around them
+    //n = 0 determined from start, just a 1 at the starting position
     return -1;
   }
 }
