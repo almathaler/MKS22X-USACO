@@ -116,39 +116,11 @@ public class USACO{
       for (int col = 0; col<cols; col++){
         boardA[row][col] = 0;
         boardB[row][col] = 0;
-        //don't modify boardA[rowStart][colStart] to = 1, this is an edge case. in n=3, rS cS isn't 5 but 4
       }
     }
-    try{
-      if (canUpdate[rowStart+1][colStart]){
-        boardB[rowStart+1][colStart] = 1;
-      }
-    }catch (IndexOutOfBoundsException e){
-
-    }try{
-      if (canUpdate[rowStart-1][colStart]){
-        boardB[rowStart-1][colStart] = 1;
-      }
-    }catch (IndexOutOfBoundsException e){
-
-    }try{
-      if (canUpdate[rowStart][colStart+1]){
-        boardB[rowStart][colStart+1] = 1;
-      }
-    }catch (IndexOutOfBoundsException e){
-
-    }try{
-      if (canUpdate[rowStart][colStart-1]){
-        boardB[rowStart][colStart-1] = 1;
-      }
-    }catch (IndexOutOfBoundsException e){
-
-    }//initialized boards
-    int toReturn = boardB[rowEnd][colEnd]; // this is the val of toReturn
-    if (rowEnd == rowStart && colEnd == colStart){
-      toReturn = 1;
-    }
-    for (int curTime = 2; curTime <= time; curTime++){//idt it makes a difference to count back, if time is 0 won't enter loop otherwise makes no diff
+    boardA[rowStart][colStart] = 1;//initialized boards
+    int toReturn = boardA[rowEnd][colEnd];
+    for (int curTime = 1; curTime <= time; curTime++){//idt it makes a difference to count back, if time is 0 won't enter loop otherwise makes no diff
       if (curTime%2 == 0){ //modify boardA
         //System.out.println("\n" + curTime + " printing boardA");
         //System.out.println(Arrays.toString(boardA));
