@@ -3,15 +3,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 public class USACO{
-
+  /*
   public static void main(String[] args){
     try{
-      System.out.println(silver("ctravel.1.in"));
+      System.out.println(silver("ctravel.2.in"));
     }catch(FileNotFoundException e){
       //System.out.println("file not here");
     }
   }
-
+  */
   public static int bronze(String filename) throws FileNotFoundException{
     //read in the file
     File f = new File(filename);
@@ -119,10 +119,10 @@ public class USACO{
     int toReturn = boardA[rowEnd][colEnd]; // this is the val of toReturn
     for (int curTime = 1; curTime <= time; curTime++){//idt it makes a difference to count back, if time is 0 won't enter loop otherwise makes no diff
       if (curTime%2 == 0){ //modify boardA
-        System.out.println("\n" + curTime + "printing boardA");
+        //System.out.println("\n" + curTime + "printing boardA");
         //System.out.println(Arrays.toString(boardA));
         for (int r = 0; r<rows; r++){
-          System.out.println(Arrays.toString(boardA[r]));
+          //System.out.println(Arrays.toString(boardA[r]));
           for (int c = 0; c<cols; c++){
             if (boardB[r][c] == 0 && canUpdate[r][c]){ //means can be modified in other board
               try{
@@ -158,10 +158,10 @@ public class USACO{
         }
         toReturn = boardA[rowEnd][colEnd];
       }else{ //modify boardB
-        System.out.println("\n" + curTime + "printing boardB");
+        //System.out.println("\n" + curTime + "printing boardB");
         //System.out.println(Arrays.toString(boardB));
         for (int r = 0; r<rows; r++){
-          System.out.println(Arrays.toString(boardB[r]));
+          //System.out.println(Arrays.toString(boardB[r]));
           for (int c = 0; c<cols; c++){
             if (boardA[r][c] == 0 && canUpdate[r][c]){ //means can be modified in other board
               try{
