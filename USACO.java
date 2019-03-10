@@ -150,7 +150,7 @@ public class USACO{
     }
     for (int curTime = 2; curTime <= time; curTime++){//idt it makes a difference to count back, if time is 0 won't enter loop otherwise makes no diff
       if (curTime%2 == 0){ //modify boardA
-        System.out.println("\n" + curTime + " printing boardA");
+        //System.out.println("\n" + curTime + " printing boardA");
         //System.out.println(Arrays.toString(boardA));
         for (int r = 0; r<rows; r++){
         //  System.out.println(Arrays.toString(boardA[r]));
@@ -187,12 +187,12 @@ public class USACO{
               */
             }
           }
-          System.out.println(Arrays.toString(boardA[r])+ "                        " + Arrays.toString(boardChars[r]));
+          //System.out.println(Arrays.toString(boardA[r])+ "                        " + Arrays.toString(boardChars[r]));
         }
         toReturn = boardA[rowEnd][colEnd];
-        System.out.println(toReturn + "<-- toReturn");
+        //System.out.println(toReturn + "<-- toReturn");
       }else{ //modify boardB
-        System.out.println("\n" + curTime + " printing boardB");
+        //System.out.println("\n" + curTime + " printing boardB");
         //System.out.println(Arrays.toString(boardB));
         for (int r = 0; r<rows; r++){
           for (int c = 0; c<cols; c++){
@@ -217,10 +217,10 @@ public class USACO{
               }
             }
           }
-          System.out.println(Arrays.toString(boardB[r]) + "                " + Arrays.toString(boardChars[r]));
+          //System.out.println(Arrays.toString(boardB[r]) + "                " + Arrays.toString(boardChars[r]));
         }
         toReturn = boardB[rowEnd][colEnd];
-        System.out.println(toReturn + "<-- toReturn");
+        //System.out.println(toReturn + "<-- toReturn");
       }
     }
     return toReturn;
